@@ -8,7 +8,9 @@ import java.util.HashSet;
 @Table
 public class Film {
 
-    public static String rootDir = "G:\\Movies\\";
+    private static String rootDir = "G:\\Movies\\";
+
+
 
     @Id
     @SequenceGenerator(
@@ -37,7 +39,7 @@ public class Film {
         this.releaseYear = releaseYear;
         this.genres = genres;
         this.stars = stars;
-        this.directoryPath = String.join(rootDir, directoryPath);
+        this.directoryPath = rootDir.concat(directoryPath);
     }
 
     public Film(String name, int releaseYear, HashSet<String> genres, HashSet<String> stars, String directoryPath) {
@@ -45,7 +47,7 @@ public class Film {
         this.releaseYear = releaseYear;
         this.genres = genres;
         this.stars = stars;
-        this.directoryPath = String.join(rootDir, directoryPath);
+        this.directoryPath = rootDir.concat(directoryPath);
     }
 
     public static String getRootDir() {
@@ -97,11 +99,14 @@ public class Film {
     }
 
     public String getDirectoryPath() {
-        return String.join(rootDir, directoryPath);
+            return directoryPath;
     }
 
     public void setDirectoryPath(String directoryPath) {
-        this.directoryPath = String.join(rootDir, directoryPath);
+        if (!directoryPath.startsWith(rootDir))
+            this.directoryPath = rootDir.concat(directoryPath);
+        else
+            this.directoryPath = directoryPath;
     }
 
     @Override
@@ -112,7 +117,7 @@ public class Film {
                 ", releaseYear=" + releaseYear +
                 ", genres=" + genres +
                 ", stars=" + stars +
-                ", directoryPath='" + String.join(rootDir, directoryPath) + '\'' +
+                ", directoryPath='" + directoryPath + '\'' +
                 '}';
     }
 }
