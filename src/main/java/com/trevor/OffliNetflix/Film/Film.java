@@ -1,11 +1,25 @@
 package com.trevor.OffliNetflix.Film;
 
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 
+@Entity
+@Table
 public class Film {
 
     public static String rootDir = "G:\\Movies\\";
 
+    @Id
+    @SequenceGenerator(
+            name = "film_sequence",
+            sequenceName = "film_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "film_sequence"
+    )
     private Long id;
     private String name;
     private int releaseYear;

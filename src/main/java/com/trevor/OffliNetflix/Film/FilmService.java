@@ -1,5 +1,6 @@
 package com.trevor.OffliNetflix.Film;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -9,16 +10,14 @@ import java.util.List;
 @Service
 public class FilmService {
 
+    private final FilmRepository filmRepository;
+
+    @Autowired
+    public FilmService(FilmRepository filmRepository) {
+        this.filmRepository = filmRepository;
+    }
+
     public List<Film> getFilms() {
-        return List.of(
-                new Film(
-                        1L,
-                        "A Quiet Place",
-                        2018,
-                        new HashSet<>(Arrays.asList("Drama", "Horror", "Sci-Fi")),
-                        new HashSet<>(Arrays.asList("Emily Blunt", "John Krasinski", "Millicent Simmonds")),
-                        "A Quiet Place (2018)"
-                )
-        );
+        return filmRepository.findAll();
     }
 }
