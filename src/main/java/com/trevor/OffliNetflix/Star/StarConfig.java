@@ -3,6 +3,7 @@ package com.trevor.OffliNetflix.Star;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public class StarConfig {
 
     @Bean
+    @Order(2)
     CommandLineRunner starCLR(StarRepository repository) {
         return args -> {
             Star emilyBlunt = new Star("Emily Blunt");

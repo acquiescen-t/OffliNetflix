@@ -10,8 +10,6 @@ public class Film {
 
     private static String rootDir = "G:\\Movies\\";
 
-
-
     @Id
     @SequenceGenerator(
             name = "film_sequence",

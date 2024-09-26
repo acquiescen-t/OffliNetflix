@@ -3,6 +3,8 @@ package com.trevor.OffliNetflix.Film;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,6 +14,7 @@ import java.util.List;
 public class FilmConfig {
 
     @Bean
+    @Order(Ordered.LOWEST_PRECEDENCE)
     CommandLineRunner commandLineRunner(FilmRepository repository) {
         return args -> {
             Film aQuietPlace = new Film(

@@ -3,6 +3,7 @@ package com.trevor.OffliNetflix.Genre;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public class GenreConfig {
 
     @Bean
+    @Order(1)
     CommandLineRunner genreCLR(GenreRepository repository) {
         return args -> {
             Genre horror = new Genre("Horror");
