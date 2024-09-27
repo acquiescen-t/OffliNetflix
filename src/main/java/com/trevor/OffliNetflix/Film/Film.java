@@ -1,8 +1,10 @@
 package com.trevor.OffliNetflix.Film;
 
+import com.trevor.OffliNetflix.Genre.Genre;
+import com.trevor.OffliNetflix.Star.Star;
 import jakarta.persistence.*;
 
-import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -21,30 +23,34 @@ public class Film {
             generator = "film_sequence"
     )
     private Long id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_genres",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    Set<Genre> genresOfFilm;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_stars",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "star_id")
+    )
+    Set<Star> starring;
+
     private String name;
     private int releaseYear;
-    private HashSet<String> genres;
-    private HashSet<String> stars;
     private String directoryPath;
 
     public Film() {
 
     }
 
-    public Film(Long id, String name, int releaseYear, HashSet<String> genres, HashSet<String> stars, String directoryPath) {
-        this.id = id;
+    public Film(String name, int releaseYear, String directoryPath) {
         this.name = name;
         this.releaseYear = releaseYear;
-        this.genres = genres;
-        this.stars = stars;
-        this.directoryPath = rootDir.concat(directoryPath);
-    }
-
-    public Film(String name, int releaseYear, HashSet<String> genres, HashSet<String> stars, String directoryPath) {
-        this.name = name;
-        this.releaseYear = releaseYear;
-        this.genres = genres;
-        this.stars = stars;
         this.directoryPath = rootDir.concat(directoryPath);
     }
 
@@ -80,20 +86,20 @@ public class Film {
         this.releaseYear = releaseYear;
     }
 
-    public HashSet<String> getGenres() {
-        return genres;
+    public Set<Genre> getGenresOfFilm() {
+        return genresOfFilm;
     }
 
-    public void setGenres(HashSet<String> genres) {
-        this.genres = genres;
+    public void setGenresOfFilm(Set<Genre> genres) {
+        this.genresOfFilm = genres;
     }
 
-    public HashSet<String> getStars() {
-        return stars;
+    public Set<Star> getStarring() {
+        return starring;
     }
 
-    public void setStars(HashSet<String> stars) {
-        this.stars = stars;
+    public void setStarring(Set<Star> stars) {
+        this.starring = stars;
     }
 
     public String getDirectoryPath() {
@@ -113,8 +119,8 @@ public class Film {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", releaseYear=" + releaseYear +
-                ", genres=" + genres +
-                ", stars=" + stars +
+                ", genresOfFilm=" + genresOfFilm +
+                ", starring=" + starring +
                 ", directoryPath='" + directoryPath + '\'' +
                 '}';
     }

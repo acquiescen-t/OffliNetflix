@@ -1,6 +1,9 @@
 package com.trevor.OffliNetflix.Genre;
 
+import com.trevor.OffliNetflix.Film.Film;
 import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table
@@ -17,17 +20,15 @@ public class Genre {
             generator = "genre_sequence"
     )
     private Long id;
+
+    @ManyToMany(mappedBy = "genresOfFilm")
+    Set<Film> filmsOfMatchingGenre;
+
     private String name;
 
     public Genre() {
 
     }
-
-    public Genre(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public Genre(String name) {
         this.name = name;
     }
