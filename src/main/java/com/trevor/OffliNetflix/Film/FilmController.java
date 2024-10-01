@@ -29,8 +29,13 @@ public class FilmController {
         return new ResponseEntity<List<Film>>(filmService.getAllFilms(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Optional<Film>> getFilmById(@PathVariable Long id) {
         return new ResponseEntity<Optional<Film>>(filmService.getFilmById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/query/{name}")
+    public ResponseEntity<Optional<List<Film>>> getFilmByName(@PathVariable String name) {
+        return new ResponseEntity<Optional<List<Film>>>(filmService.getFilmsByName(name), HttpStatus.OK);
     }
 }
