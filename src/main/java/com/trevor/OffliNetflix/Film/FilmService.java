@@ -25,4 +25,8 @@ public class FilmService {
     public Optional<Film> getFilmById(Long id) {
         return filmRepository.findById(id);
     }
+
+    public Optional<List<Film>> getFilmsByName(String name) {
+        return filmRepository.findByNameContainingIgnoreCase(name);
+    }
 }
