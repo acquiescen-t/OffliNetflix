@@ -6,7 +6,6 @@ import com.trevor.OffliNetflix.Genre.Genre;
 import com.trevor.OffliNetflix.Genre.GenreRepository;
 import com.trevor.OffliNetflix.Star.Star;
 import com.trevor.OffliNetflix.Star.StarRepository;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -82,14 +81,19 @@ public class InitialiseRunner implements CommandLineRunner {
         for (Path p : allFiles) {
             String s = p.toString();
             if (s.endsWith("mp4") || s.endsWith("mkv") || s.endsWith("avi")) {
-                String filmName = FilenameUtils.removeExtension(s);
-                System.out.printf("filmName: %s\n", s);
+                Path fileName = p.getFileName();
+                System.out.printf("fileName: %s\n", fileName);
 
-                Matcher m = Pattern.compile("(.*)\\((\\d{4})\\)(.*)").matcher(filmName);
+                Matcher m = Pattern.compile("(.*)\\((\\d{4})\\)(.*)").matcher(fileName.toString());
                 int filmReleaseYear = -1;
                 if (m.find())
                     filmReleaseYear = Integer.parseInt(m.group(2));
                 System.out.printf("filmReleaseYear: %d\n", filmReleaseYear);
+
+                String filmName = fileName.toString()
+                        .replaceAll(" \\(\\d{4}\\)", "")
+                        .replaceAll("(.mp4|.mkv|.avi)", "");
+                System.out.printf("Saving new film(%s, %d, %s)\n", filmName, filmReleaseYear, s);
 
                 filmRepo.save(new Film(filmName, filmReleaseYear, s));
             }
