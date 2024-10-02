@@ -49,15 +49,14 @@ public class Film {
     }
 
     public Film(String name, int releaseYear, String directoryPath) {
-        this.name = name;
-        this.releaseYear = releaseYear;
-        this.directoryPath = rootDir.concat(directoryPath);
+        this.setName(name);
+        this.setReleaseYear(releaseYear);
+        this.setDirectoryPath(directoryPath);
     }
 
     public static String getRootDir() {
         return rootDir;
     }
-
     public static void setRootDir(String rootDir) {
         Film.rootDir = rootDir;
     }
@@ -65,7 +64,6 @@ public class Film {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -73,7 +71,6 @@ public class Film {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -81,7 +78,6 @@ public class Film {
     public int getReleaseYear() {
         return releaseYear;
     }
-
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
@@ -89,7 +85,6 @@ public class Film {
     public Set<Genre> getGenresOfFilm() {
         return genresOfFilm;
     }
-
     public void setGenresOfFilm(Set<Genre> genres) {
         this.genresOfFilm = genres;
     }
@@ -97,7 +92,6 @@ public class Film {
     public Set<Star> getStarring() {
         return starring;
     }
-
     public void setStarring(Set<Star> stars) {
         this.starring = stars;
     }
@@ -105,7 +99,6 @@ public class Film {
     public String getDirectoryPath() {
             return directoryPath;
     }
-
     public void setDirectoryPath(String directoryPath) {
         if (!directoryPath.startsWith(rootDir))
             this.directoryPath = rootDir.concat(directoryPath);
