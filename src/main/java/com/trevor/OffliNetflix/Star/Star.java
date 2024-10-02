@@ -3,6 +3,8 @@ package com.trevor.OffliNetflix.Star;
 import com.trevor.OffliNetflix.Film.Film;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -21,7 +23,7 @@ public class Star {
     )
     private Long id;
 
-    @ManyToMany(mappedBy = "starring")
+    @ManyToMany(mappedBy = "starsOfFilm")
     Set<Film> starFilm;
 
     private String name;
@@ -47,6 +49,20 @@ public class Star {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static Set<Star> extractStars(String stars, StarRepository starRepository) {
+        String[] starList = stars.split(", ");
+        Set<Star> starSet = new HashSet<>();
+
+        for (String s : starList) {
+            Optional<Star> star = starRepository.getByNameIgnoreCase(s);
+            if (star.isEmpty())
+                throw new IllegalStateException(("Star '" + star + "' not found!"));
+
+            starSet.add(star.get());
+        }
+        return starSet;
     }
 
     @Override
