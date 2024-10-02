@@ -38,8 +38,11 @@ public class InitialiseRunner implements CommandLineRunner {
 
     public void initialiseGenres() {
         Genre horror = new Genre("Horror");
-        Genre thriller = new Genre("Slasher");
-        Genre romance = new Genre("Slasher");
+        Genre psychologicalHorror = new Genre("Psychological Horror");
+        Genre thriller = new Genre("Thriller");
+        Genre slasher = new Genre("Slasher");
+        Genre psychologicalThriller = new Genre("Psychological Thriller");
+        Genre romance = new Genre("Romance");
         Genre scienceFiction = new Genre("Science Fiction");
         Genre action = new Genre("Action");
         Genre crime = new Genre("Crime");
@@ -49,10 +52,14 @@ public class InitialiseRunner implements CommandLineRunner {
         Genre adventure = new Genre("Adventure");
         Genre fantasy = new Genre("Fantasy");
         Genre sport = new Genre("Sport");
+        Genre mystery = new Genre("Mystery");
 
         genreRepo.saveAll(List.of(
                 horror,
+                psychologicalHorror,
                 thriller,
+                slasher,
+                psychologicalThriller,
                 romance,
                 scienceFiction,
                 action,
@@ -62,16 +69,23 @@ public class InitialiseRunner implements CommandLineRunner {
                 superhero,
                 adventure,
                 fantasy,
-                sport
+                sport,
+                mystery
         ));
     }
     public void initialiseStars() {
         Star emilyBlunt = new Star("Emily Blunt");
         Star johnKrasinski = new Star("John Krasinski");
+        Star daneDeHann = new Star("Dane DeHaan");
+        Star jasonIsaacs = new Star("Jason Isaacs");
+        Star miaGoth = new Star("Mia Goth");
 
         starRepo.saveAll(List.of(
                 emilyBlunt,
-                johnKrasinski
+                johnKrasinski,
+                daneDeHann,
+                jasonIsaacs,
+                miaGoth
         ));
     }
     public void initialiseFilms() throws IOException {
