@@ -38,7 +38,7 @@ public class Film {
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "star_id")
     )
-    Set<Star> starring;
+    Set<Star> starsOfFilm;
 
     private String name;
     private int releaseYear;
@@ -89,11 +89,11 @@ public class Film {
         this.genresOfFilm = genres;
     }
 
-    public Set<Star> getStarring() {
-        return starring;
+    public Set<Star> getStarsOfFilm() {
+        return starsOfFilm;
     }
-    public void setStarring(Set<Star> stars) {
-        this.starring = stars;
+    public void setStarsOfFilm(Set<Star> stars) {
+        this.starsOfFilm = stars;
     }
 
     public String getDirectoryPath() {
@@ -113,7 +113,7 @@ public class Film {
                 ", name='" + name + '\'' +
                 ", releaseYear=" + releaseYear +
                 ", genresOfFilm=" + genresOfFilm +
-                ", starring=" + starring +
+                ", starring=" + starsOfFilm +
                 ", directoryPath='" + directoryPath + '\'' +
                 '}';
     }
