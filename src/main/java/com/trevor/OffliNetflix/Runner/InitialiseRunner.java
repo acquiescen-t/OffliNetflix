@@ -104,12 +104,22 @@ public class InitialiseRunner implements CommandLineRunner {
                     filmReleaseYear = Integer.parseInt(m.group(2));
                 System.out.printf("filmReleaseYear: %d\n", filmReleaseYear);
 
-                String filmName = fileName.toString()
+                String directoryPath = s.substring(0, s.lastIndexOf('\\'));
+                System.out.printf("directoryPath: %s\n", directoryPath);
+
+                String filmPath = fileName.toString();
+                System.out.printf("filmPath: %s\n", filmPath);
+
+                String filmName = filmPath
                         .replaceAll(" \\(\\d{4}\\)", "")
                         .replaceAll("(.mp4|.mkv|.avi)", "");
-                System.out.printf("Saving new film(%s, %d, %s)\n", filmName, filmReleaseYear, s);
+                System.out.printf("filmName: %s\n", filmName);
 
-                filmRepo.save(new Film(filmName, filmReleaseYear, s));
+                String posterPath = directoryPath.concat("\\poster.jpg").replace(Film.getRootDir(), "127.0.0.1:8081/");
+                System.out.printf("posterPath: %s\n", posterPath);
+
+                filmRepo.save(new Film(filmName, filmReleaseYear, directoryPath, posterPath, filmPath));
+                return;
             }
         }
     }

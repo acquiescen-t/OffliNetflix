@@ -44,14 +44,18 @@ public class Film {
     private int releaseYear;
     private String directoryPath;
 
+    private String posterPath;
+    private String filmPath;
     public Film() {
 
     }
 
-    public Film(String name, int releaseYear, String directoryPath) {
+    public Film(String name, int releaseYear, String directoryPath, String posterPath, String filmPath) {
         this.setName(name);
         this.setReleaseYear(releaseYear);
         this.setDirectoryPath(directoryPath);
+        this.setPosterPath(posterPath);
+        this.setFilmPath(filmPath);
     }
 
     public static String getRootDir() {
@@ -106,6 +110,16 @@ public class Film {
             this.directoryPath = directoryPath;
     }
 
+    public String getPosterPath() { return posterPath; }
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+    public String getFilmPath() { return filmPath; }
+    public void setFilmPath(String filmPath) {
+        this.filmPath = filmPath;
+    }
+
     @Override
     public String toString() {
         return "Film{" +
@@ -115,6 +129,8 @@ public class Film {
                 ", genresOfFilm=" + genresOfFilm +
                 ", starring=" + starsOfFilm +
                 ", directoryPath='" + directoryPath + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                ", filmPath='" + filmPath + '\'' +
                 '}';
     }
 }
