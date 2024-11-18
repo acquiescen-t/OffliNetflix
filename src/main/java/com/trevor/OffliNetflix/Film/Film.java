@@ -5,6 +5,7 @@ import com.trevor.OffliNetflix.Star.Star;
 import jakarta.persistence.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table
@@ -13,16 +14,10 @@ public class Film {
     private static String rootDir = "G:\\Movies\\";
 
     @Id
-    @SequenceGenerator(
-            name = "film_sequence",
-            sequenceName = "film_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "film_sequence"
+            strategy = GenerationType.UUID
     )
-    private Long id;
+    private UUID id;
 
     @ManyToMany
     @JoinTable(
@@ -44,18 +39,20 @@ public class Film {
     private int releaseYear;
     private String directoryPath;
 
-    private String posterPath;
+    private String imageUrl;
     private String filmPath;
+    private String synopsis;
     public Film() {
 
     }
 
-    public Film(String name, int releaseYear, String directoryPath, String posterPath, String filmPath) {
+    public Film(String name, int releaseYear, String directoryPath, String imageUrl, String filmPath, String synopsis) {
         this.setName(name);
         this.setReleaseYear(releaseYear);
         this.setDirectoryPath(directoryPath);
-        this.setPosterPath(posterPath);
+        this.setimageUrl(imageUrl);
         this.setFilmPath(filmPath);
+        this.setSynopsis(synopsis);
     }
 
     public static String getRootDir() {
@@ -65,10 +62,10 @@ public class Film {
         Film.rootDir = rootDir;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -110,14 +107,19 @@ public class Film {
             this.directoryPath = directoryPath;
     }
 
-    public String getPosterPath() { return posterPath; }
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public String getimageUrl() { return imageUrl; }
+    public void setimageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getFilmPath() { return filmPath; }
     public void setFilmPath(String filmPath) {
         this.filmPath = filmPath;
+    }
+
+    public String getSynopsis() { return synopsis; }
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
     @Override
@@ -127,10 +129,11 @@ public class Film {
                 ", name='" + name + '\'' +
                 ", releaseYear=" + releaseYear +
                 ", genresOfFilm=" + genresOfFilm +
-                ", starring=" + starsOfFilm +
+                ", starsOfFilm=" + starsOfFilm +
                 ", directoryPath='" + directoryPath + '\'' +
-                ", posterPath='" + posterPath + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", filmPath='" + filmPath + '\'' +
+                ", synopsis='" + synopsis + '\'' +
                 '}';
     }
 }
