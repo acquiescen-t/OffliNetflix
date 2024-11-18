@@ -6,22 +6,17 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table
 public class Genre {
 
     @Id
-    @SequenceGenerator(
-            name = "genre_sequence",
-            sequenceName = "genre_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "genre_sequence"
+            strategy = GenerationType.UUID
     )
-    private Long id;
+    private UUID id;
 
     @ManyToMany(mappedBy = "genresOfFilm")
     Set<Film> filmsOfMatchingGenre;
@@ -35,11 +30,11 @@ public class Genre {
         this.name = name;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
