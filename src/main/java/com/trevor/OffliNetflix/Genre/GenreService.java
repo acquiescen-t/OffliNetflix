@@ -27,8 +27,4 @@ public class GenreService {
     public Optional<List<Genre>> getGenresByName(String name) {
         return genreRepository.findByNameContainingIgnoreCase(name);
     }
-
-    public Genre createGenre(String genreName) {
-        return genreRepository.save(new Genre(genreName));
-    }
 }
