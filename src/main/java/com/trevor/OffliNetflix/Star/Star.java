@@ -6,40 +6,40 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table
 public class Star {
 
+    private static String rootDir = "G:\\Movies\\web-assets\\stars";
+
     @Id
-    @SequenceGenerator(
-            name = "stars_sequence",
-            sequenceName = "stars_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "stars_sequence"
+            strategy = GenerationType.UUID
     )
-    private Long id;
+    private UUID id;
 
     @ManyToMany(mappedBy = "starsOfFilm")
     Set<Film> starFilm;
 
     private String name;
+    private String imageUrl;
 
     public Star() {
 
     }
-    public Star(String name) {
+    public Star(String name, String imageUrl) {
+
         this.name = name;
+        this.imageUrl = imageUrl;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -50,6 +50,12 @@ public class Star {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    public static String getRootDir() { return rootDir; }
 
     public static Set<Star> extractStars(String stars, StarRepository starRepository) {
         String[] starList = stars.split(", ");
@@ -70,6 +76,7 @@ public class Star {
         return "Star{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 }
