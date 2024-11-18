@@ -35,7 +35,7 @@ public class StarController {
     }
 
     @PostMapping
-    public ResponseEntity<Star> createStar(@RequestBody String starName) {
-        return new ResponseEntity<Star>(starService.createStar(starName), HttpStatus.CREATED);
+    public ResponseEntity<Star> createStar(@RequestBody String starName, String imageUrl) {
+        return new ResponseEntity<Star>(starService.createStar(starName, imageUrl), HttpStatus.CREATED);
     }
 }
