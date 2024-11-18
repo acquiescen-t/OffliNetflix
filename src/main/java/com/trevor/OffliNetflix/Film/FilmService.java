@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 // Interacts with the database via FilmRepository to return responses to FilmController
 
@@ -31,7 +32,7 @@ public class FilmService {
         return filmRepository.findAll();
     }
 
-    public Optional<Film> getFilmById(Long id) {
+    public Optional<Film> getFilmById(UUID id) {
         return filmRepository.findById(id);
     }
 
@@ -39,8 +40,18 @@ public class FilmService {
         return filmRepository.findByNameContainingIgnoreCase(name);
     }
 
-    public Film updateGenres(String filmId, String genres) {
-        Optional<Film> film = getFilmById(Long.parseLong(filmId));
+    public Optional<List<Film>> getFilmsByGenre(String genre) {
+        Optional<List<Genre>> g = genreRepository.findByNameContainingIgnoreCase(genre);
+
+        if (g.isPresent()) {
+            g.get().stream().forEach(System.out::print);
+        }
+
+        return filmRepository.findByGenresOfFilmIn(g);
+    }
+
+    public Film updateGenres(UUID filmId, String genres) {
+        Optional<Film> film = getFilmById(filmId);
         if (film.isEmpty())
             throw new IllegalStateException("Film '" + film + "' not found!");
 
@@ -51,9 +62,33 @@ public class FilmService {
 
         return film.get();
     }
+/*
+    public Optional<List<Film>> updateInformation(UUID[] filmsId, String[] filmsGenres, String[] filmsStars) {
+        if (filmsId.length != filmsGenres.length || filmsGenres.length != filmsStars.length) {
+            String message = "Mismatch between filmsId.length ["
+                    .concat(String.valueOf(filmsId.length))
+                    .concat("], filmsGenre.length [")
+                    .concat(String.valueOf(filmsGenres.length))
+                    .concat("] and filmsStars.length [")
+                    .concat(String.valueOf(filmsStars.length))
+                    .concat("]!");
+            throw new IllegalStateException(message);
+        }
 
-    public Film updateStars(String filmId, String stars) {
-        Optional<Film> film = getFilmById(Long.parseLong(filmId));
+        int count = filmsId.length;
+        Optional<List<Film>> updatedFilms = null;
+
+        for (int loop = 0; loop < count; loop++) {
+            updateGenres(filmsId[loop], filmsGenres[loop]);
+            Film updatedFilm = updateStars(filmsId[loop], filmsStars[loop]);
+            updatedFilms.get().add(updatedFilm);
+        }
+
+        return updatedFilms;
+    }
+*/
+    public Film updateStars(UUID filmId, String stars) {
+        Optional<Film> film = getFilmById(filmId);
         if (film.isEmpty())
             throw new IllegalStateException("Film '" + film + "' not found!");
 
