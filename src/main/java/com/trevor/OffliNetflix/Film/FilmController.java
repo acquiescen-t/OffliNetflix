@@ -43,6 +43,11 @@ public class FilmController {
         return new ResponseEntity<Optional<List<Film>>>(filmService.getFilmsByGenre(genre), HttpStatus.OK);
     }
 
+    @GetMapping("/get-random/{count}")
+    public ResponseEntity<List<Film>> getRandomFilms(@PathVariable int count) {
+        return new ResponseEntity<List<Film>>(filmService.getRandomFilms(count), HttpStatus.OK);
+    }
+
     @PostMapping("/update-genres")
     public ResponseEntity<Film> updateFilmGenres(@RequestBody Map<String, String> payload) {
         return new ResponseEntity<Film>(filmService.updateGenres(UUID.fromString(payload.get("filmId")), payload.get("genres")), HttpStatus.CREATED);

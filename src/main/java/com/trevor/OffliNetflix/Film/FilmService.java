@@ -7,10 +7,7 @@ import com.trevor.OffliNetflix.Star.StarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 // Interacts with the database via FilmRepository to return responses to FilmController
 
@@ -50,6 +47,12 @@ public class FilmService {
         return filmRepository.findByGenresOfFilmIn(g);
     }
 
+    public List<Film> getRandomFilms(int count) {
+        List<Film> allFilms = filmRepository.findAll();
+        Collections.shuffle(allFilms);
+        allFilms = allFilms.subList(0, count);
+        return allFilms;
+    }
     public Film updateGenres(UUID filmId, String genres) {
         Optional<Film> film = getFilmById(filmId);
         if (film.isEmpty())
