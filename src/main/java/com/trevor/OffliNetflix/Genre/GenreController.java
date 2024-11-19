@@ -35,4 +35,10 @@ public class GenreController {
     public ResponseEntity<Optional<List<Genre>>> getGenresByName(@PathVariable String name) {
         return new ResponseEntity<Optional<List<Genre>>>(genreService.getGenresByName(name), HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<Genre> createGenre(@RequestBody String genreName) {
+        return new ResponseEntity<Genre>(genreService.createGenre(genreName), HttpStatus.CREATED);
+    }
+
 }
