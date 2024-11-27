@@ -4,6 +4,7 @@ import com.trevor.OffliNetflix.Genre.Genre;
 import com.trevor.OffliNetflix.Genre.GenreRepository;
 import com.trevor.OffliNetflix.Star.Star;
 import com.trevor.OffliNetflix.Star.StarRepository;
+import com.trevor.OffliNetflix.TMDBFilm.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,4 +103,31 @@ public class FilmService {
 
         return film.get();
     }
+
+    public Film updateFilm(UUID filmId, Result result) {
+        System.out.println("Calling updateFilm with:");
+        System.out.printf("UUID: %s\n", filmId);
+        System.out.printf("result: %s\n", result);
+
+        Optional<Film> film = getFilmById(filmId);
+        if (film.isEmpty())
+            throw new IllegalStateException("Film '" + film + "' not found!");
+
+        film.get().setBackdropUrl(result.getBackdrop_path());
+        film.get().setImageUrl(result.getPoster_path());
+        film.get().setSynopsis(result.getOverview());
+
+        System.out.printf("result.backdrop_path: %s\n", result.getBackdrop_path());
+        System.out.printf("result.poster_path: %s\n", result.getPoster_path());
+        System.out.printf("result.overview: %s\n", result.getOverview());
+
+
+        filmRepository.save(film.get());
+        return film.get();
+    }
+
+//    public List<Film> getFilmsByMostGenres() {
+//        List<Film> filmsWithMostGenres = filmRepository.getFilmsByMostGenres();
+//        return filmsWithMostGenres;
+//    }
 }
