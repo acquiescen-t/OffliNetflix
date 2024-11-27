@@ -117,9 +117,12 @@ public class InitialiseRunner implements CommandLineRunner {
                     String posterPath = directoryPath.concat("/poster.jpg").replace(Film.getRootDir(), "http://localhost:8081/");
                     System.out.printf("posterPath: %s\n", posterPath);
 
+                    String backdropPath = directoryPath.concat("/backdrop.jpg").replace(Film.getRootDir(), "http://localhost:8081/");
+                    System.out.printf("backdropPath: %s\n", backdropPath);
+
                     String synopsis = "Synopsis placeholder";
 
-                    filmRepo.save(new Film(filmName, filmReleaseYear, directoryPath, posterPath, filmPath, synopsis));
+                    filmRepo.save(new Film(filmName, filmReleaseYear, directoryPath, posterPath, backdropPath, filmPath, synopsis));
                 }
             }
         }
