@@ -40,17 +40,19 @@ public class Film {
     private String directoryPath;
 
     private String imageUrl;
+    private String backdropUrl;
     private String filmPath;
     private String synopsis;
     public Film() {
 
     }
 
-    public Film(String name, int releaseYear, String directoryPath, String imageUrl, String filmPath, String synopsis) {
+    public Film(String name, int releaseYear, String directoryPath, String imageUrl, String backdropUrl, String filmPath, String synopsis) {
         this.setName(name);
         this.setReleaseYear(releaseYear);
         this.setDirectoryPath(directoryPath);
-        this.setimageUrl(imageUrl);
+        this.setImageUrl(imageUrl);
+        this.setBackdropUrl(backdropUrl);
         this.setFilmPath(filmPath);
         this.setSynopsis(synopsis);
     }
@@ -107,11 +109,13 @@ public class Film {
             this.directoryPath = directoryPath;
     }
 
-    public String getimageUrl() { return imageUrl; }
-    public void setimageUrl(String imageUrl) {
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
+    public String getBackdropUrl() { return backdropUrl; }
+    public void setBackdropUrl(String backdropUrl) { this.backdropUrl = backdropUrl; }
     public String getFilmPath() { return filmPath; }
     public void setFilmPath(String filmPath) {
         this.filmPath = filmPath;
@@ -132,6 +136,7 @@ public class Film {
                 ", starsOfFilm=" + starsOfFilm +
                 ", directoryPath='" + directoryPath + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", backdropUrl='" + backdropUrl + '\'' +
                 ", filmPath='" + filmPath + '\'' +
                 ", synopsis='" + synopsis + '\'' +
                 '}';
