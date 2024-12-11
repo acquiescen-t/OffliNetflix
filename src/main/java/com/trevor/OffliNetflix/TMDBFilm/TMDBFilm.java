@@ -1,5 +1,7 @@
 package com.trevor.OffliNetflix.TMDBFilm;
 
+import java.util.Arrays;
+
 public class TMDBFilm {
     private int page;
     private Result[] results;
@@ -39,5 +41,15 @@ public class TMDBFilm {
     }
     public void setTotalResults(int totalResults) {
         this.totalResults = totalResults;
+    }
+
+    @Override
+    public String toString() {
+        return "TMDBFilm{" +
+                "page=" + page +
+                ", results=" + Arrays.toString(results) +
+                ", totalPages=" + totalPages +
+                ", totalResults=" + totalResults +
+                '}';
     }
 }
