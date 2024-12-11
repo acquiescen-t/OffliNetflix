@@ -26,13 +26,14 @@ public class Star {
     private String name;
     private String imageUrl;
 
+    private String searchableName;
     public Star() {
 
     }
-    public Star(String name, String imageUrl) {
-
-        this.name = name;
-        this.imageUrl = imageUrl;
+    public Star(String name, String imageUrl, String searchableName) {
+        setName(name);
+        setImageUrl(imageUrl);
+        setSearchableName(searchableName);
     }
 
     public UUID getId() {
@@ -51,6 +52,9 @@ public class Star {
         this.name = name;
     }
 
+    public String getSearchableName() { return searchableName; }
+    public void setSearchableName(String searchableName) { this.searchableName = searchableName; }
+
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
@@ -63,8 +67,9 @@ public class Star {
 
         for (String s : starList) {
             Optional<Star> star = starRepository.getByNameIgnoreCase(s);
-            if (star.isEmpty())
+            if (star.isEmpty()) {
                 throw new IllegalStateException(("Star '" + star + "' not found!"));
+            }
 
             starSet.add(star.get());
         }
@@ -77,6 +82,7 @@ public class Star {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", searchableName='" + searchableName + '\'' +
                 '}';
     }
 }
