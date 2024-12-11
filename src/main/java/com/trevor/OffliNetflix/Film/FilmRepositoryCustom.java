@@ -13,21 +13,21 @@ public class FilmRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Object[]> getFilmsByStar(String star) {
-        String nativeQuery =
-                """
-                SELECT release_year, f.id, directory_path, film_path, image_url, name, synopsis, backdrop_url 
-                FROM star s 
-                INNER JOIN film_stars fs
-                ON s.id = fs.star_id
-                INNER JOIN film f 
-                ON f.id = fs.film_id 
-                WHERE UPPER(s.searchable_name) LIKE '
-                """.concat(star).concat("';");
-
-        Query query = entityManager.createNativeQuery(nativeQuery);
-        return query.getResultList();
-    }
+//    public List<Object[]> getFilmsByStar(String star) {
+//        String nativeQuery =
+//                """
+//                SELECT release_year, f.id, directory_path, film_path, image_url, name, synopsis, backdrop_url
+//                FROM star s
+//                INNER JOIN film_stars fs
+//                ON s.id = fs.star_id
+//                INNER JOIN film f
+//                ON f.id = fs.film_id
+//                WHERE UPPER(s.searchable_name) LIKE '
+//                """.concat(star).concat("';");
+//
+//        Query query = entityManager.createNativeQuery(nativeQuery);
+//        return query.getResultList();
+//    }
     public List<Object[]> getFilmsByMostGenres(int count) {
         String nativeQuery = "SELECT release_year, f.id, directory_path, film_path, image_url, name, synopsis, backdrop_url " +
                 "FROM Film f " +
