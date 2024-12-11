@@ -3,7 +3,6 @@ package com.trevor.OffliNetflix.TMDBFilm;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 
 public class Result {
     private boolean adult;
