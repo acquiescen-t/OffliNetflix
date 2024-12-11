@@ -36,19 +36,22 @@ public class Film {
     Set<Star> starsOfFilm;
 
     private String name;
+    private Integer tmdb_id;
     private int releaseYear;
     private String directoryPath;
 
     private String imageUrl;
     private String backdropUrl;
     private String filmPath;
+    @Column(columnDefinition = "TEXT")
     private String synopsis;
     public Film() {
 
     }
 
-    public Film(String name, int releaseYear, String directoryPath, String imageUrl, String backdropUrl, String filmPath, String synopsis) {
+    public Film(String name, Integer tmdb_id, int releaseYear, String directoryPath, String imageUrl, String backdropUrl, String filmPath, String synopsis) {
         this.setName(name);
+        this.setTmdb_id(tmdb_id);
         this.setReleaseYear(releaseYear);
         this.setDirectoryPath(directoryPath);
         this.setImageUrl(imageUrl);
@@ -78,6 +81,8 @@ public class Film {
         this.name = name;
     }
 
+    public Integer getTmdb_id() { return tmdb_id; }
+    public void setTmdb_id(Integer tmdb_id) { this.tmdb_id = tmdb_id; }
     public int getReleaseYear() {
         return releaseYear;
     }
@@ -131,6 +136,7 @@ public class Film {
         return "Film{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", tmdb_id='" + tmdb_id + '\'' +
                 ", releaseYear=" + releaseYear +
                 ", genresOfFilm=" + genresOfFilm +
                 ", starsOfFilm=" + starsOfFilm +
