@@ -28,7 +28,7 @@ public class StarService {
         return starRepository.findByNameContainingIgnoreCase(name);
     }
 
-    public Star createStar(String starName, String imageUrl) {
-        return starRepository.save(new Star(starName, imageUrl));
+    public Star createStar(Star star) {
+        return starRepository.save(star);
     }
 }
