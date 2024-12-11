@@ -81,7 +81,7 @@ public class InitialiseRunner implements CommandLineRunner {
             String imageUrl = p.toString().replace(Film.getRootDir(), "http://localhost:8081/");
             String name = p.getFileName().toString();
             name = name.substring(0, name.length() - 4);
-            Star star = new Star(name, imageUrl);
+            Star star = new Star(name, imageUrl, name.replaceAll(" ", "-"));
             System.out.println(star);
             starRepo.save(star);
         }
@@ -122,7 +122,7 @@ public class InitialiseRunner implements CommandLineRunner {
 
                     String synopsis = "Synopsis placeholder";
 
-                    filmRepo.save(new Film(filmName, filmReleaseYear, directoryPath, posterPath, backdropPath, filmPath, synopsis));
+                    filmRepo.save(new Film(filmName, -1, filmReleaseYear, directoryPath, posterPath, backdropPath, filmPath, synopsis));
                 }
             }
         }
