@@ -23,11 +23,17 @@ public class Genre {
 
     private String name;
 
+    private Integer tmdbId;
+
     public Genre() {
 
     }
     public Genre(String name) {
-        this.name = name;
+        setName(name);
+    }
+    public Genre(String name, Integer tmdbId) {
+        setName(name);
+        setTmdbId(tmdbId);
     }
 
     public UUID getId() {
@@ -44,6 +50,14 @@ public class Genre {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getTmdbId() {
+        return tmdbId;
+    }
+
+    public void setTmdbId(Integer tmdbId) {
+        this.tmdbId = tmdbId == null ? 0 : tmdbId;
     }
 
     public static Set<Genre> extractGenres(String genres, GenreRepository genreRepository) {
@@ -66,6 +80,7 @@ public class Genre {
         return "Genre{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", tmdbId='" + tmdbId + '\'' +
                 '}';
     }
 }
